@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.damon.model">
+    <!--<select id="testCase" resultType="TestCaseModel">-->
+        <!--&lt;!&ndash;    SELECT * FROM test_case1 WHERE case_name=#{case_name}; &ndash;&gt;-->
+        <!--SELECT * FROM test_case WHERE group_id NOT IN (SELECT groups.id FROM groups WHERE isRun=0) ORDER BY group_id;-->
+    <!--</select>-->
+
+    <!--获取测试地址-->
+    <!--<select id="hostName" resultType="string">-->
+    <!--SELECT host_name FROM host where isSelect=1;-->
+    <!--</select>-->
+
+    <!--初始化测试结果-->
+    <update id="initTest">
+        UPDATE test_data set result=0;
+    </update>
+
+    <!--查找所属组-->
+    <!--<select id="getGroup" parameterType="int" resultType="com.damont.model.GroupsModel">-->
+        <!--SELECT * from groups where id=#{groupId};-->
+    <!--</select>-->
+
+    <!--设置测试结果-->
+    <update id="setTestResult" parameterType="com.damon.model.TestCaseModel">
+        UPDATE test_data SET result=#{result} WHERE id=#{id};
+    </update>
+
+    <!--查询测试结果-->
+    <select id="getTestResult" parameterType="int" resultType="int">
+        SELECT result from test_data WHERE id=#{id};
+    </select>
+
+    <!--获取数据库配置-->
+    <!--<select id="getDbConfig" parameterType="string" resultType="com.damont.model.ConfigModel">-->
+        <!--SELECT * FROM db_config WHERE db_name=#{db_name};-->
+    <!--</select>-->
+
+    <!--获取接口保存的数据-->
+    <select id="getUserData" parameterType="string" resultType="string">
+        SELECT user_value FROM user_data WHERE user_key=#{key};
+    </select>
+
+    <!--插入接口要保存的数据-->
+    <insert id="setUserData" parameterType="com.damon.model.UserDataModel">
+        INSERT INTO user_data VALUE (#{key},#{value});
+    </insert>
+
+    <!--更新接口要保存的数据-->
+    <update id="updateUserData" parameterType="com.damon.model.UserDataModel">
+        UPDATE user_data SET user_value=#{value} WHERE user_key=#{key};
+    </update>
+
+    <!--初始化用户数据-->
+    <delete id="initTestData">
+        DELETE FROM user_data;
+    </delete>
+
+    <!--查找testcase表-->
+    <select id="gettestcase" resultType="com.damon.model.TestCaseModel">
+        SELECT * FROM test_case WHERE isrun !=0 ORDER BY id;
+    </select>
+
+    <!--查找测试数据-->
+    <select id="gettestdata" parameterType="int" resultType="com.damon.model.TestDataModel">
+        SELECT * FROM test_data WHERE id=#{id};
+    </select>
+
+    <select id="getinterface" parameterType="int" resultType="com.damon.model.InterfaceModel">
+        SELECT * FROM interface WHERE id=#{id};
+    </select>
+    <select id="getUserDataList" resultType="com.damon.model.UserDataModel">
+        SELECT * FROM user_data;
+    </select>
+    <!--执行任意SQL语句-->
+    <select id="selectSql" parameterType="string" resultType="map">
+        ${value}
+    </select>
+
+</mapper>

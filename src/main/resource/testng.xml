@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="TestSuit">
+<test name="InterfaceTest">
+    <classes>
+        <class name="com.damon.cases.TestCase"></class>
+    </classes>
+</test>
+
+<listeners>
+    <listener class-name="com.damon.config.ExtentTestNGIReporterListener"/>
+    <listener class-name="com.damon.config.TestListener"/>
+</listeners>
+
+</suite>
